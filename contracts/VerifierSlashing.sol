@@ -85,7 +85,7 @@ contract VerifierSlashing is AccessControl, ReentrancyGuard, Pausable, Governanc
     error NoStakeToSlash();
     error SlashingTooFrequent();
     error InvalidStakingContract();
-    error SlashAmountTooHigh();
+    error SlashAmountRoundsToZero();
     
     /**
      * @dev Constructor sets up roles and initial configuration
@@ -153,7 +153,7 @@ contract VerifierSlashing is AccessControl, ReentrancyGuard, Pausable, Governanc
         uint256 slashAmount = (currentStake * percentage) / 100;
         
         if (slashAmount == 0) {
-            revert SlashAmountTooHigh();
+            revert SlashAmountRoundsToZero();
         }
         
         // Update tracking
@@ -247,7 +247,7 @@ contract VerifierSlashing is AccessControl, ReentrancyGuard, Pausable, Governanc
         uint256 slashAmount = (currentStake * percentage) / 100;
         
         if (slashAmount == 0) {
-            revert SlashAmountTooHigh();
+            revert SlashAmountRoundsToZero();
         }
         
         // Update tracking
